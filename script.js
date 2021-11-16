@@ -1,10 +1,9 @@
 const File = require("./models/File");
-const fs = require("fs");
 const db = require("./db/db");
+const cloudinary = require("./services/cloudinary");
 
 db();
 
-// console.log("Job start");
 const fetchData = async () => {
   try {
     const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -13,16 +12,14 @@ const fetchData = async () => {
 
     if (expiredFiles.length) {
       for (const file of expiredFiles) {
-        fs.unlinkSync(file.path);
+        cloudinary.uploader.destroy(file.path);
         await file.remove();
       }
-      console.log("Job one");
     }
     console.log("Job done");
   } catch (err) {
     console.log("ooops, err", err);
   }
 };
-// console.log("Job end");
 
 fetchData();

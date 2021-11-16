@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const File = require("../models/File");
 const sendMail = require("../services/emailService");
 const upload = require("../services/multerService");
+const cloudinary = require("../services/cloudinary");
 
 const router = Router();
 
@@ -40,10 +41,14 @@ router.post("/", (req, res) => {
         return res.render("upload", { error: err.message });
       }
 
+      const result = await cloudinary.uploader.upload(path, {
+        folder: "file-transfer",
+      });
+
       const newFile = new File({
         filename,
         uuid: uuidv4(),
-        path,
+        path: result.public_id,
         size,
       });
 
@@ -52,7 +57,6 @@ router.post("/", (req, res) => {
       return res.json({
         file: `http://localhost:3000/${newFile.uuid}`,
       });
-      // return res.render("upload");
     });
   } catch (err) {
     return res.render("upload", { error: err.message });
