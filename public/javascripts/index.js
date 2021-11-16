@@ -15,7 +15,7 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "http://localhost:3000";
+const baseURL = "https://sharp-share.herokuapp.com/";
 const uploadURL = `${baseURL}/`;
 const emailURL = `${baseURL}/send`;
 

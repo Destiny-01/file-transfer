@@ -55,7 +55,7 @@ router.post("/", (req, res) => {
       await newFile.save();
 
       return res.json({
-        file: `http://localhost:3000/${newFile.uuid}`,
+        file: `https://sharp-share.herokuapp.com//${newFile.uuid}`,
       });
     });
   } catch (err) {
@@ -109,7 +109,7 @@ router.post("/send", async (req, res) => {
       text: `${emailFrom} shared a file with you`,
       html: require("../services/emailTemplate")({
         emailFrom,
-        downloadLink: `http://localhost:3000/${file.uuid}`,
+        downloadLink: `https://sharp-share.herokuapp.com//${file.uuid}`,
         size: (bytes = file.size) => {
           const k = 1024;
           const sizes = ["Bytes", "KB", "MB", "GB"];
