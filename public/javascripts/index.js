@@ -15,8 +15,8 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "https://sharp-share.herokuapp.com/";
-const uploadURL = `${baseURL}`;
+const baseURL = "https://sharp-share.herokuapp.com";
+const uploadURL = `${baseURL}/`;
 const emailURL = `${baseURL}/send`;
 
 const maxAllowedSize = 100 * 1024 * 1024; //100mb
